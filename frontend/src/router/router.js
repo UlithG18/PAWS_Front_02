@@ -14,6 +14,13 @@ import { dashboardPage, dashboardEvents } from "../views/user-dashboard.js";
 import { vetDashboardPage, vetDashboardEvents } from "../views/vet-dashboard.js";
 import { loadMapPage, loadMapEvents } from "../views/map-page.js";
 import { healthTipsPage } from "../views/health-tips.js";
+import { aboutUsPage, aboutUsEvents } from "../views/about-us.js";
+import { contactUsPage, contactUsEvents } from "../views/contact-us.js";
+import { workWithUsPage, workWithUsEvents } from "../views/work-with-us.js";
+import { specialistsPage, specialistsEvents } from "../views/specialists.js";
+import { medicalRecordsPage, medicalRecordsEvents } from "../views/medical-records.js";
+import { userScheduleAppointmentsPage, userScheduleAppointmentsEvents } from "../views/users- schedule-appointments.js";
+import { businessScheduleAppointmentsPage, businessScheduleAppointmentsEvents } from "../views/bussines-schedule-appointments.js";
 
 const PUBLIC_PATHS = ["/", "/login", "/register"];
 
@@ -46,6 +53,22 @@ const routes = {
   },
   "/map-page": loadMapPage,
   "/tips": healthTipsPage,
+  "/about-us": aboutUsPage,
+  "/contact": contactUsPage,
+  "/work-with-us": workWithUsPage,
+  "/specialists": specialistsPage,
+  "/medical-records": () => {
+    if (!checkAuth("owner")) return;
+    return medicalRecordsPage();
+  },
+  "/appointments": () => {
+    if (!checkAuth("owner")) return;
+    return userScheduleAppointmentsPage();
+  },
+  "/business-appointments": () => {
+    if (!checkAuth("vet")) return;
+    return businessScheduleAppointmentsPage();
+  },
 
   "/unauthorized": () => `
     <div class="p-10 text-center">
@@ -140,6 +163,34 @@ function runPageEvents(path) {
 
     case "/veterinary":
       vetDashboardEvents();
+      break;
+
+    case "/about-us":
+      aboutUsEvents();
+      break;
+
+    case "/contact":
+      contactUsEvents();
+      break;
+
+    case "/work-with-us":
+      workWithUsEvents();
+      break;
+
+    case "/specialists":
+      specialistsEvents();
+      break;
+
+    case "/medical-records":
+      medicalRecordsEvents();
+      break;
+
+    case "/appointments":
+      userScheduleAppointmentsEvents();
+      break;
+
+    case "/business-appointments":
+      businessScheduleAppointmentsEvents();
       break;
   }
 }
