@@ -21,6 +21,7 @@ import { vetDashboardPage, vetDashboardEvents } from "../views/vet-dashboard.js"
 import { medicalRecordsPage, medicalRecordsEvents } from "../views/medical-records.js";
 import { userScheduleAppointmentsPage, userScheduleAppointmentsEvents } from "../views/users- schedule-appointments.js";
 import { businessScheduleAppointmentsPage, businessScheduleAppointmentsEvents } from "../views/bussines-schedule-appointments.js";
+import { adminDashboardPage, adminDashboardEvents } from "../views/admin-dashboard.js";
 
 const PUBLIC_PATHS = ["/", "/login", "/register"];
 
@@ -51,6 +52,7 @@ const routes = {
   "/medical-records": medicalRecordsPage,
   "/appointments": userScheduleAppointmentsPage,
   "/business-appointments": businessScheduleAppointmentsPage,
+  "/admin-dashboard": adminDashboardPage,
 
   "/unauthorized": () => `
     <div class="p-10 text-center">
@@ -173,6 +175,10 @@ function runPageEvents(path) {
 
     case "/business-appointments":
       businessScheduleAppointmentsEvents();
+      break;
+
+    case "/admin-dashboard":
+      adminDashboardEvents();
       break;
   }
 }
